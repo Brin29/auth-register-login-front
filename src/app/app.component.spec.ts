@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'auth-front-project' title`, () => {
+  it(`should have the 'auth-front' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('auth-front-project');
+    expect(app.title).toEqual('auth-front');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, auth-front-project');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, auth-front');
   });
 });
