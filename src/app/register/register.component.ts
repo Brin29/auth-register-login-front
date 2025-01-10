@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-register',
@@ -14,29 +13,13 @@ export class RegisterComponent implements OnInit {
   }
 
   user = {
-    firstName: "asa",
+    firstName: "assasaa",
     lastName: "sasa",
-    username: "sa",
-    password: "sa"
+    username: "ssassaasssasaasasaa13112123121asasaa",
+    password: "sasasa2"
   }
-
-  header = new HttpHeaders()
-    .set("content-type", "application/json")
 
   ngOnInit(): void {
-    this.viewData()
-    this.enviarData()
-  }
-
-  viewData(){
-    this.authService.getInfo().subscribe({
-      next: (data) => {
-        console.log(data)
-      },
-      error: (err) => {
-        console.error(err)
-      }
-    })
   }
 
   enviarData(){
@@ -45,9 +28,19 @@ export class RegisterComponent implements OnInit {
         console.log(data)
       },
       error: (err) => {
-        console.error(err)
+        console.log(err)
       }
     })
+
+    this.authService.viewData().subscribe({
+      next: (data) => {
+        console.log(data)
+      },
+      error: (err) => {
+        console.log(err)
+      }
+    })
+    
   }
 
 }
