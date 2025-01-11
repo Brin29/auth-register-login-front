@@ -1,29 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(public authService: AuthService) {
+  constructor(private authService: AuthService) {
   }
 
-  user = {
-    firstName: "assasaa",
-    lastName: "sasa",
-    username: "ssassaasssasaasasaa13112123121asasaa",
-    password: "sasasa2"
+  ngOnInit() {
   }
 
-  ngOnInit(): void {
-  }
+  formUser = new FormGroup({
+    firstName: new FormControl("", Validators.required),
+    lastName: new FormControl("", Validators.required),
+    username: new FormControl("", [Validators.email, Validators.required]),
+    password: new FormControl("", [Validators.minLength(10), Validators.required])
+  });
 
-  enviarData(){
-    this.authService.registerUser(this.user).subscribe({
+
+
+
+  registerUser(){
+    this.authService.registerUser(this.formUser.value).subscribe({
       next: (data) => {
         console.log(data)
       },
@@ -40,7 +45,5 @@ export class RegisterComponent implements OnInit {
         console.log(err)
       }
     })
-    
   }
-
 }
