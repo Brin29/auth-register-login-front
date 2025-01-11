@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterModule, Router } from '@angular/router';
 
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
@@ -25,21 +26,11 @@ export class RegisterComponent implements OnInit {
   });
 
 
-
-
   registerUser(){
     this.authService.registerUser(this.formUser.value).subscribe({
       next: (data) => {
         console.log(data)
-      },
-      error: (err) => {
-        console.log(err)
-      }
-    })
-
-    this.authService.viewData().subscribe({
-      next: (data) => {
-        console.log(data)
+        this.router.navigate(['/login'])
       },
       error: (err) => {
         console.log(err)

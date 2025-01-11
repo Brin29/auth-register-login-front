@@ -14,9 +14,6 @@ export class AuthService {
 
   }
 
-  viewData(): Observable<any>{
-    return this.http.get("/api/auth/prueba");
-  }
 
 
   registerUser(user:any): Observable<any>{
@@ -24,5 +21,12 @@ export class AuthService {
       "Access-Control-Allow-Origin": "http://localhost:8080"
     })
     return this.http.post("/api/auth/register", user,{headers})
+  }
+
+  loginUser(user:any): Observable<any>{
+    const headers = new HttpHeaders({
+      "Access-Control-Allow-Origin": "http://localhost:8080"
+    })
+    return this.http.post("/api/auth/login", user, {headers})
   }
 }
