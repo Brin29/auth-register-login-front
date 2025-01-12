@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 import { Observable } from 'rxjs';
 
 
@@ -10,7 +11,7 @@ export class AuthService {
   
 
   // Permite hacer las peticiones a la API
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cookies:CookieService) {
 
   }
 
@@ -28,5 +29,19 @@ export class AuthService {
       "Access-Control-Allow-Origin": "http://localhost:8080"
     })
     return this.http.post("/api/auth/login", user, {headers})
+  }
+
+  logout(){
+    this.cookies.delete("token");
+  }
+
+  isLoged(): boolean{
+    const token = this.cookies.get("token"); 
+    if(token) {
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }
